@@ -1,0 +1,54 @@
+/**
+ * Theme: Flat Bootstrap
+ * 
+ * Javascript for touch-enabled carousels and smooth scrolling internal links.
+ *
+ * @package flat-bootstrap
+ */
+ 
+( function( $ ) {
+
+	// Touchscreen swipe through carousel (slider)
+	$(document).ready(function() {  
+	   if ($.mobile) {
+			//must target by ID, so these need to be used in your content
+			$('#myCarousel, #myCarousel2, #agnosia-bootstrap-carousel').swiperight(function() {  
+				$(this).carousel('prev');  
+			});  
+			$('#myCarousel, #myCarousel2, #agnosia-bootstrap-carousel').swipeleft(function() {  
+				$(this).carousel('next');  
+			});  
+		}
+	});  
+
+	// Smooth scroll to anchor within the page
+	$(document).ready(function() {
+		$('.smoothscroll').click(function() {
+		  var target = $(this.hash);
+		  var offset = $('body').css('padding-top');
+		  if (offset) offset = offset.replace('px','');
+		  target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+		  if (target.length) {
+			$('html,body').animate({
+			  scrollTop: ( target.offset().top - 51 )
+			}, 1000);
+			return false;
+		  }
+	});
+	});
+	
+} )( jQuery );
+jQuery(function($) {
+$('.navbar .dropdown').hover(function() {
+$(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideDown();
+
+}, function() {
+$(this).find('.dropdown-menu').first().stop(true, true).delay(100).slideUp();
+
+});
+
+$('.navbar .dropdown > a').click(function(){
+location.href = this.href;
+});
+
+});
